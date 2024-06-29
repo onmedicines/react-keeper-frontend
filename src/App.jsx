@@ -10,7 +10,6 @@ function App() {
     let { value } = e.target;
     setTitle(value);
   }
-
   function updateContent(e) {
     let { value } = e.target;
     setContent(value);
@@ -21,6 +20,12 @@ function App() {
     });
 
     e.preventDefault();
+  }
+  function remove(id) {
+    let newNotes = notes.filter((item, index) => {
+      return index !== id;
+    });
+    setNotes(newNotes);
   }
 
   return (
@@ -33,11 +38,17 @@ function App() {
           <button type="submit">Add</button>
         </form>
         <div className="card-container">
-          {notes.map((note) => {
+          {notes.map((note, index) => {
             return (
-              <div className="card">
+              <div className="card" key={index} id={index}>
                 <h1 className="title">{note[0]}</h1>
                 <p className="content">{note[1]}</p>
+                <button
+                  onClick={() => {
+                    remove(index);
+                  }}>
+                  Delete
+                </button>
               </div>
             );
           })}
