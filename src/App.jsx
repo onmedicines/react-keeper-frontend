@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -28,11 +29,11 @@ function App() {
         <h1 className="app-title">Keeper</h1>
         <form action="submit" onSubmit={updateNotes}>
           <input name="title" onChange={updateTitle} value={title} type="text" placeholder="Title" />
-          <input name="content" onChange={updateContent} value={content} type="text" placeholder="Your note" />
+          <textarea name="content" onChange={updateContent} value={content} type="text" placeholder="Your note"></textarea>
           <button type="submit">Add</button>
         </form>
         <div className="card-container">
-          {notes.map((note, index) => {
+          {notes.map((note) => {
             return (
               <div className="card">
                 <h1 className="title">{note[0]}</h1>
