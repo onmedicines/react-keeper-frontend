@@ -6,13 +6,10 @@ function App() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  function updateTitle(e) {
-    let { value } = e.target;
-    setTitle(value);
-  }
-  function updateContent(e) {
-    let { value } = e.target;
-    setContent(value);
+  function updateInputs(e) {
+    let { name, value } = e.target;
+    if (name === "title") setTitle(value);
+    else if (name === "content") setContent(value);
   }
   function updateNotes(e) {
     setNotes((prev) => {
@@ -33,8 +30,8 @@ function App() {
       <div id="app-wrapper">
         <h1 className="app-title">Keeper</h1>
         <form action="submit" onSubmit={updateNotes}>
-          <input name="title" onChange={updateTitle} value={title} type="text" placeholder="Title" />
-          <textarea name="content" onChange={updateContent} value={content} type="text" placeholder="Your note"></textarea>
+          <input name="title" onChange={updateInputs} value={title} type="text" placeholder="Title" />
+          <textarea name="content" onChange={updateInputs} value={content} type="text" placeholder="Your note"></textarea>
           <button type="submit">Add</button>
         </form>
         <div className="card-container">
