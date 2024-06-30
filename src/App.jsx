@@ -16,7 +16,7 @@ function App() {
   }
   function updateNotes(e) {
     setNotes((prev) => {
-      return [...prev, [title, content]];
+      return [...prev, { title: title, content: content }];
     });
 
     e.preventDefault();
@@ -41,8 +41,8 @@ function App() {
           {notes.map((note, index) => {
             return (
               <div className="card" key={index} id={index}>
-                <h1 className="title">{note[0]}</h1>
-                <p className="content">{note[1]}</p>
+                <h1 className="title">{note.title}</h1>
+                <p className="content">{note.content}</p>
                 <button
                   onClick={() => {
                     remove(index);
