@@ -1,10 +1,15 @@
 import { useState } from "react";
 import "./App.css";
 
+// material ui
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import AddIcon from "@mui/icons-material/Add";
+
 function App() {
   const [notes, setNotes] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isExpanded, setIsExpanded] = useState(false);
 
   function updateInputs(e) {
     let { name, value } = e.target;
@@ -12,9 +17,13 @@ function App() {
     else if (name === "content") setContent(value);
   }
   function updateNotes(e) {
-    setNotes((prev) => {
-      return [...prev, { title: title, content: content }];
-    });
+    if (title !== "" && content !== "") {
+      setNotes((prev) => {
+        return [...prev, { title: title, content: content }];
+      });
+      setTitle("");
+      setContent("");
+    }
 
     e.preventDefault();
   }
@@ -24,15 +33,24 @@ function App() {
     });
     setNotes(newNotes);
   }
+  function updateIsExpanded(e) {
+    setIsExpanded((prev) => {
+      return true;
+    });
+  }
 
   return (
     <div id="App">
       <div id="app-wrapper">
         <h1 className="app-title">Keeper</h1>
         <form action="submit" onSubmit={updateNotes}>
-          <input name="title" onChange={updateInputs} value={title} type="text" placeholder="Title" />
-          <textarea name="content" onChange={updateInputs} value={content} type="text" placeholder="Your note"></textarea>
-          <button type="submit">Add</button>
+          {isExpanded && <input name="title" onChange={updateInputs} value={title} type="text" placeholder="Title" />}
+          <textarea name="content" onChange={updateInputs} value={content} type="text" placeholder="Your note" onClick={updateIsExpanded} rows={isExpanded ? "3" : "1"}></textarea>
+          {isExpanded && (
+            <button type="submit">
+              <AddIcon></AddIcon>
+            </button>
+          )}
         </form>
         <div className="card-container">
           {notes.map((note, index) => {
@@ -44,7 +62,7 @@ function App() {
                   onClick={() => {
                     remove(index);
                   }}>
-                  Delete
+                  <DeleteForeverIcon></DeleteForeverIcon>
                 </button>
               </div>
             );

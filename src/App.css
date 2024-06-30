@@ -26,6 +26,7 @@ button:hover {
     border-radius: 0.25rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     max-width: 40rem;
 
     input,
@@ -42,12 +43,10 @@ button:hover {
     input {
       font-weight: 600;
     }
-    textarea {
-      margin-top: 1rem;
-      min-height: 5rem;
-    }
     button {
-      padding: 0.5rem;
+      display: grid;
+      place-content: center;
+      padding: 0.25rem;
       background-color: #006769;
       color: #e6ff94;
       width: fit-content;
@@ -67,14 +66,12 @@ button:hover {
       display: flex;
       flex-direction: column;
 
-      h1,
-      p {
-        margin-bottom: 1rem;
-      }
       h1 {
+        margin-bottom: 1rem;
         font-size: 1.25rem;
       }
       p {
+        margin-bottom: 1rem;
         font-size: 1rem;
         line-height: 1.5rem;
       }
@@ -85,7 +82,7 @@ button:hover {
         border: none;
         font-size: 0.85rem;
 
-        padding: 0.5rem;
+        /* padding: 0.5rem; */
         /* background-color: #edf2f6; */
         background: inherit;
         color: #fa6855;
